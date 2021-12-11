@@ -85,7 +85,12 @@ def empezar():
     global numero_pantalla_segundos
     global numero_pantalla_minutos
     global validator_thread
+    global pausa_numero
     while True:
+        if pausa_numero == 1:
+            pausa_numero = 2
+            validator_thread = 0
+            break
         pantalla_segundos.config(state="normal")
         if validator == 0:    
             numero_pantalla_segundos.set("59")
@@ -127,11 +132,22 @@ validator_thread = 0
 
 def start1():
     global validator_thread
-    if validator_thread == 0:
+    if validator_thread == 0 and pausa_numero == 0:
         validator_thread = 1
         threading.Thread(target=empezar).start()
     else:
         pass
+
+pausa_numero = 0
+
+def pausar():
+    global pausa_numero
+    if pausa_numero == 0:
+        boton_pausar.config(text="VOLVER")
+        pausa_numero = 1
+    elif pausa_numero == 2:
+        pausa_numero = 0
+        start1()
 
 #BOTONES-------------------------------------------------------------
 foto1 = PhotoImage(file="arriba.png")
@@ -142,9 +158,12 @@ boton_subir.grid(row=1, column=0, columnspan=1, sticky="e")
 foto = PhotoImage(file="abajo.png")
 foto = foto.subsample(80)
 boton_bajar = Button(mi_frame, image=foto, width=100, height=50,bg="grey", command=lambda:pulsar_abajo(pantalla_minutos.get()))
-boton_bajar.grid(row=3, column=0, columnspan=1, sticky="e", pady=(0, 20))
+boton_bajar.grid(row=3, column=0, columnspan=1, sticky="e", pady=(0, 100))
 
 boton_empezar = Button(mi_frame, text="EMPEZAR", font=("Calibri", 20), bg="grey", command=lambda:start1())
-boton_empezar.grid(row=4, column=1, pady=(0, 20))
+boton_empezar.place(x=90, y=340)
+
+boton_pausar = Button(mi_frame, text="PAUSAR", font=("Calibri", 20), bg="grey", command=lambda:pausar())
+boton_pausar.place(x=260, y=340)
 
 root.mainloop()
