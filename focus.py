@@ -5,6 +5,7 @@ import threading
 #PANTALLA--------------------------------------------------------------
 root = Tk()
 root.title("Pomodoro_focus")
+root.resizable(0, 0)
 
 mi_frame = Frame(root)
 mi_frame.pack()
