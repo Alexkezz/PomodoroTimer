@@ -64,7 +64,7 @@ def empezar():
 
         pantalla_segundos.config(state="normal")
         if validator == 0:    
-            numero_pantalla_segundos.set("3")
+            numero_pantalla_segundos.set("59")
             validator += 1
         numero = pantalla_segundos.get()
         numero = int(numero) - 1
