@@ -152,6 +152,7 @@ def pausar():
         pausa_numero = 1
     elif pausa_numero == 2:
         pausa_numero = 0
+        boton_pausar.config(text="PAUSAR")
         start1()
 
 #BOTONES-------------------------------------------------------------
