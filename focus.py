@@ -66,8 +66,8 @@ def empezar():
     global validator
     global numero_pantalla_segundos
     global numero_pantalla_minutos
+    global validator_thread
     while True:
-
         pantalla_segundos.config(state="normal")
         if validator == 0:    
             numero_pantalla_segundos.set("59")
@@ -81,6 +81,8 @@ def empezar():
             numero2 = int(numero_pantalla_minutos.get())
             numero2 -= 1
             if numero2 == -1:
+                validator_thread = 0
+                validator = 0
                 break 
             pantalla_minutos.config(state="normal")
             if numero2 < 10:
@@ -97,9 +99,15 @@ def empezar():
 
         pantalla_segundos.config(state="disabled")
         
+validator_thread = 0
 
 def start1():
-    threading.Thread(target=empezar).start()
+    global validator_thread
+    if validator_thread == 0:
+        validator_thread = 1
+        threading.Thread(target=empezar).start()
+    else:
+        pass
 
 #BOTONES-------------------------------------------------------------
 foto1 = PhotoImage(file="arriba.png")
@@ -114,6 +122,5 @@ boton_bajar.grid(row=3, column=0, columnspan=1, sticky="e", pady=(0, 20))
 
 boton_empezar = Button(mi_frame, text="EMPEZAR", font=("Calibri", 20), bg="grey", command=lambda:start1())
 boton_empezar.grid(row=4, column=1, pady=(0, 20))
-
 
 root.mainloop()
