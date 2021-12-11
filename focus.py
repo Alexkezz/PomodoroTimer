@@ -41,7 +41,10 @@ def pulsar_arriba(numero):
     pantalla_minutos.config(state="normal")
     numero = int(numero)
     numero += 1
-    numero_pantalla_minutos.set(str(numero))
+    if numero < 10:
+        numero_pantalla_minutos.set("0" + str(numero))
+    else:
+        numero_pantalla_minutos.set(str(numero))
     pantalla_minutos.config(state="disabled")
 
 def pulsar_abajo(numero):
@@ -51,7 +54,10 @@ def pulsar_abajo(numero):
     pantalla_minutos.config(state="normal")
     numero = int(numero)
     numero -= 1
-    numero_pantalla_minutos.set(str(numero))
+    if numero < 10:
+        numero_pantalla_minutos.set("0" + str(numero))
+    else:
+        numero_pantalla_minutos.set(str(numero))
     pantalla_minutos.config(state="disabled")
 
 validator = 0
@@ -71,24 +77,29 @@ def empezar():
         numero = str(numero)
         time.sleep(1)
     
-        if numero_pantalla_segundos.get() == "0":
+        if numero_pantalla_segundos.get() == "00":
             numero2 = int(numero_pantalla_minutos.get())
             numero2 -= 1
             if numero2 == -1:
-                break
+                break 
             pantalla_minutos.config(state="normal")
-            numero_pantalla_minutos.set(str(numero2))
+            if numero2 < 10:
+                numero_pantalla_minutos.set("0" + str(numero2))
+            else:
+                numero_pantalla_minutos.set(str(numero2))
             pantalla_minutos.config(state="disabled")
             numero_pantalla_segundos.set("59")
         else:
-            numero_pantalla_segundos.set(str(numero))
+            if int(numero) < 10:
+                numero_pantalla_segundos.set("0"+numero)
+            else:
+                numero_pantalla_segundos.set(numero)
 
         pantalla_segundos.config(state="disabled")
         
-    
+
 def start1():
     threading.Thread(target=empezar).start()
-
 
 #BOTONES-------------------------------------------------------------
 foto1 = PhotoImage(file="arriba.png")
