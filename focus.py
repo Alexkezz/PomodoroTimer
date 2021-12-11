@@ -38,6 +38,14 @@ pantalla_segundos.config(state="disable")
 
 def pulsar_arriba(numero):
     global numero_pantalla_minutos
+    if int(numero) >= 99:
+        pantalla_minutos.config(width=3)
+        boton_bajar.config(width=150, height=50)
+        boton_subir.config(width=150, height=50)
+    else:
+        pantalla_minutos.config(width=2)
+        boton_bajar.config(width=100, height=50)
+        boton_subir.config(width=100, height=50)
     pantalla_minutos.config(state="normal")
     numero = int(numero)
     numero += 1
@@ -51,6 +59,16 @@ def pulsar_abajo(numero):
     global numero_pantalla_minutos
     if numero == "0" or numero == "00":
         return 
+
+    if int(numero) >= 101:
+        pantalla_minutos.config(width=3)
+        boton_bajar.config(width=150, height=50)
+        boton_subir.config(width=150, height=50)
+    else:
+        pantalla_minutos.config(width=2)
+        boton_bajar.config(width=100, height=50)
+        boton_subir.config(width=100, height=50)
+
     pantalla_minutos.config(state="normal")
     numero = int(numero)
     numero -= 1
@@ -83,12 +101,18 @@ def empezar():
             if numero2 == -1:
                 validator_thread = 0
                 validator = 0
-                break 
+                break
             pantalla_minutos.config(state="normal")
             if numero2 < 10:
                 numero_pantalla_minutos.set("0" + str(numero2))
             else:
-                numero_pantalla_minutos.set(str(numero2))
+                if numero2 < 100:
+                    pantalla_minutos.config(width=2)
+                    boton_bajar.config(width=100, height=50)
+                    boton_subir.config(width=100, height=50)
+                    numero_pantalla_minutos.set(str(numero2))
+                else:
+                    numero_pantalla_minutos.set(str(numero2))
             pantalla_minutos.config(state="disabled")
             numero_pantalla_segundos.set("59")
         else:
