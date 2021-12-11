@@ -37,7 +37,7 @@ pantalla_segundos.config(state="disable")
 #FUNCIONES-----------------------------------------------------------
 
 def pulsar_arriba(numero):
-    global numero_pantalla
+    global numero_pantalla_minutos
     pantalla_minutos.config(state="normal")
     numero = int(numero)
     numero += 1
@@ -45,7 +45,7 @@ def pulsar_arriba(numero):
     pantalla_minutos.config(state="disabled")
 
 def pulsar_abajo(numero):
-    global numero_pantalla
+    global numero_pantalla_minutos
     if numero == "0" or numero == "00":
         return 
     pantalla_minutos.config(state="normal")
@@ -59,20 +59,31 @@ validator = 0
 def empezar():
     global validator
     global numero_pantalla_segundos
+    global numero_pantalla_minutos
     while True:
+
         pantalla_segundos.config(state="normal")
         if validator == 0:    
-            numero_pantalla_segundos.set("59")
+            numero_pantalla_segundos.set("3")
             validator += 1
         numero = pantalla_segundos.get()
         numero = int(numero) - 1
+        numero = str(numero)
         time.sleep(1)
-        numero_pantalla_segundos.set(str(numero))
-        if numero_pantalla_segundos == "0":
+    
+        if numero_pantalla_segundos.get() == "0":
+            numero2 = int(numero_pantalla_minutos.get())
+            numero2 -= 1
+            if numero2 == -1:
+                break
+            pantalla_minutos.config(state="normal")
+            numero_pantalla_minutos.set(str(numero2))
+            pantalla_minutos.config(state="disabled")
             numero_pantalla_segundos.set("59")
+        else:
+            numero_pantalla_segundos.set(str(numero))
+
         pantalla_segundos.config(state="disabled")
-        if numero_pantalla_minutos == "0":
-            break
         
     
 def start1():
