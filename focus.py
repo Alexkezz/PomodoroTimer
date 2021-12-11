@@ -38,6 +38,8 @@ pantalla_segundos.config(state="disable")
 
 def pulsar_arriba(numero):
     global numero_pantalla_minutos
+    if validator_thread == 1 or pausa_numero == 2:
+        return
     if int(numero) >= 99:
         pantalla_minutos.config(width=3)
         boton_bajar.config(width=150, height=50)
@@ -57,6 +59,8 @@ def pulsar_arriba(numero):
 
 def pulsar_abajo(numero):
     global numero_pantalla_minutos
+    if validator_thread == 1 or pausa_numero == 2:
+        return
     if numero == "0" or numero == "00":
         return 
 
