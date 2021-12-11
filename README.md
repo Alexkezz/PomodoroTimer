@@ -1,1 +1,1 @@
-# Pomodoro_py
+# To use the pomodoro you must have Python 3 installed
