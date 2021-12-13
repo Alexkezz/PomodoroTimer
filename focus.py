@@ -9,10 +9,10 @@ root.resizable(0, 0)
 
 mi_frame = Frame(root)
 mi_frame.pack()
-mi_frame.config(bg="red")
+mi_frame.config(bg="#ff4f5a")
 
 texto = Label(mi_frame, text="Introduce el tiempo que quieres trabajar", font=("Calibri", 30), bg="grey")
-texto.grid(row=0, column=0, columnspan=3, pady=(0, 30))
+texto.grid(row=0, column=0, columnspan=3, pady=(0, 30), padx=10)
 
 numero_pantalla_minutos = StringVar()
 numero_pantalla_segundos = StringVar()
@@ -25,7 +25,7 @@ pantalla_minutos.configure({"disabledforeground" : "black"})
 pantalla_minutos.config(state="disable")
 
 
-dos_putos = Label(mi_frame, text=":", font=("Calibri",80), bg="red")
+dos_putos = Label(mi_frame, text=":", font=("Calibri",80), bg="#ff4f5a")
 dos_putos.grid(row=2, column=1)
 
 pantalla_segundos = Entry(mi_frame, font=("Calibri", 75), width=2, textvariable=numero_pantalla_segundos)
