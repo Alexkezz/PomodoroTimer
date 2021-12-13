@@ -99,6 +99,20 @@ def empezar():
         pantalla_segundos.config(state="normal")
         if validator == 0:    
             numero_pantalla_segundos.set("59")
+            numero2 = int(numero_pantalla_minutos.get())
+            numero2 -= 1
+            pantalla_minutos.config(state="normal")
+            if numero2 < 10:
+                numero_pantalla_minutos.set("0" + str(numero2))
+            else:
+                if numero2 < 100:
+                    pantalla_minutos.config(width=2)
+                    boton_bajar.config(width=100, height=50)
+                    boton_subir.config(width=100, height=50)
+                    numero_pantalla_minutos.set(str(numero2))
+                else:
+                    numero_pantalla_minutos.set(str(numero2))
+            pantalla_minutos.config(state="disabled")
             validator += 1
         numero = pantalla_segundos.get()
         numero = int(numero) - 1
